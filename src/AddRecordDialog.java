@@ -113,10 +113,15 @@ public class AddRecordDialog extends JDialog implements ActionListener {
 		if (((String) fullTimeCombo.getSelectedItem()).equalsIgnoreCase("Yes"))
 			fullTime = true;
 		// create new Employee record with details from text fields
-		theEmployee = new Employee(Integer.parseInt(idField.getText()), ppsField.getText().toUpperCase(), surnameField.getText().toUpperCase(),
-				firstNameField.getText().toUpperCase(), genderCombo.getSelectedItem().toString().charAt(0),
-				departmentCombo.getSelectedItem().toString(), Double.parseDouble(salaryField.getText()), fullTime);
-		this.parent.currentEmployee = theEmployee;
+		 theEmployee = new EmployeeBuilder()
+					.setId(Integer.parseInt(idField.getText()))
+					.setPps(ppsField.getText().toUpperCase())
+					.setSurname(surnameField.getText().toUpperCase())
+					.setFirstName(firstNameField.getText().toUpperCase())
+					.setGender(genderCombo.getSelectedItem().toString().charAt(0))
+					.setSalary(Double.parseDouble(salaryField.getText()))
+					.setFullTime(fullTime)
+					.build();this.parent.currentEmployee = theEmployee;
 		this.parent.addRecord(theEmployee);
 		this.parent.displayRecords(theEmployee);
 	}

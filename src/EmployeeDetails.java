@@ -1048,7 +1048,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 					displayEmployeeSummaryDialog();
 		} else if (e.getSource() == create || e.getSource() == add) {
 			if (checkInput() && !checkForChanges())
-				DialogFactory.createDialog("AddRecord", EmployeeDetails.getInstance());
+				DialogFactory.createDialog("AddRecord", instance);
 		} else if (e.getSource() == modify || e.getSource() == edit) {
 			if (checkInput() && !checkForChanges())
 				editDetails();
