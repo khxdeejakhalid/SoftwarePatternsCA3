@@ -356,15 +356,16 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 	// display search by ID dialog
 	private void displaySearchByIdDialog() {
-		if (isSomeoneToDisplay())
-			new SearchByIdDialog(EmployeeDetails.this);
+	    if (isSomeoneToDisplay())
+	       DialogFactory.createDialog("SearchById", EmployeeDetails.getInstance());
 	}// end displaySearchByIdDialog
 
 	// display search by surname dialog
 	private void displaySearchBySurnameDialog() {
-		if (isSomeoneToDisplay())
-			new SearchBySurnameDialog(EmployeeDetails.this);
+	    if (isSomeoneToDisplay())
+	       DialogFactory.createDialog("SearchBySurname", EmployeeDetails.getInstance());
 	}// end displaySearchBySurnameDialog
+
 
 	// find byte start in file for first active record
 	private void firstRecord() {
@@ -1047,7 +1048,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 					displayEmployeeSummaryDialog();
 		} else if (e.getSource() == create || e.getSource() == add) {
 			if (checkInput() && !checkForChanges())
-				new AddRecordDialog(EmployeeDetails.this);
+				DialogFactory.createDialog("AddRecord", EmployeeDetails.getInstance());
 		} else if (e.getSource() == modify || e.getSource() == edit) {
 			if (checkInput() && !checkForChanges())
 				editDetails();
