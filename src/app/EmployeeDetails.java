@@ -1,3 +1,4 @@
+package app;
 
 /* * 
  * This is a menu driven system that will allow users to define a data structure representing a collection of 
@@ -1145,4 +1146,6 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 	public void windowOpened(WindowEvent e) {
 	}
+	
+	
 }// end class EmployeeDetails
