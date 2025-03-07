@@ -1,9 +1,5 @@
 package app;
-/*
- * 
- * This is a Random Access Employee record definition
- * 
- * */
+
 
 import java.io.RandomAccessFile;
 import java.io.IOException;

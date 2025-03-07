@@ -1,9 +1,5 @@
 package app;
-/*
- * 
- * This class is for accessing, creating and modifying records in a file
- * 
- * */
+
 
 import java.io.EOFException;
 import java.io.IOException;

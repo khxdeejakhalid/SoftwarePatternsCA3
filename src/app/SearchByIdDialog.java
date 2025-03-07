@@ -1,9 +1,5 @@
 package app;
-/*
- * 
- * This is the dialog for Employee search by ID
- * 
- * */
+
 
 import java.awt.Color;
 import java.awt.Container;

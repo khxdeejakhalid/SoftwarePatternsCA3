@@ -1,9 +1,5 @@
 package app;
-/*
- * 
- * This is the definition of the Employee object
- * 
- * */
+
 
 public class Employee{
 	private int employeeId;

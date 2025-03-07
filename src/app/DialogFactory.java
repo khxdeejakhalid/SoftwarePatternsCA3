@@ -1,4 +1,5 @@
 package app;
+
 import javax.swing.*;
 
 public class DialogFactory {

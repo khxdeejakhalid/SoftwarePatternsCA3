@@ -1,5 +1,6 @@
 package app;
 
+
 /* * 
  * This is a menu driven system that will allow users to define a data structure representing a collection of 
  * records that can be displayed both by means of a dialog that can be scrolled through and by means of a table
@@ -24,6 +25,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Vector;
 
@@ -48,6 +51,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import command.*;
 import net.miginfocom.swing.MigLayout;
 
 public class EmployeeDetails extends JFrame implements ActionListener, ItemListener, DocumentListener, WindowListener {
@@ -86,7 +90,9 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	String[] department = { "", "Administration", "Production", "Transport", "Management" };
 	// full time combo box values
 	String[] fullTime = { "", "Yes", "No" };
-    
+	private Map<Object, Command> commands = new HashMap<>();
+
+	
 	private EmployeeDetails() {
         // private constructor to prevent instantiation
     }
@@ -994,15 +1000,10 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	// action listener for buttons, text field and menu items
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getSource() == closeApp) {
+		Command command = commands.get(e.getSource());
+		if (command != null) {
 			if (checkInput() && !checkForChanges())
-				exitApp();
-		} else if (e.getSource() == open) {
-			if (checkInput() && !checkForChanges())
-				openFile();
-		} else if (e.getSource() == save) {
-			if (checkInput() && !checkForChanges())
-				saveFile();
+				command.execute();
 			change = false;
 		} else if (e.getSource() == saveAs) {
 			if (checkInput() && !checkForChanges())
@@ -1053,9 +1054,6 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		} else if (e.getSource() == modify || e.getSource() == edit) {
 			if (checkInput() && !checkForChanges())
 				editDetails();
-		} else if (e.getSource() == delete || e.getSource() == deleteButton) {
-			if (checkInput() && !checkForChanges())
-				deleteRecord();
 		} else if (e.getSource() == searchBySurname) {
 			if (checkInput() && !checkForChanges())
 				new SearchBySurnameDialog(EmployeeDetails.this);
@@ -1081,6 +1079,13 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		JScrollPane scrollPane = new JScrollPane(dialog);
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
 		addWindowListener(this);
+		commands.put(open, new OpenCommand(this));
+		commands.put(save, new SaveCommand(this));
+		commands.put(delete, new DeleteCommand(this));
+		commands.put(deleteButton, new DeleteCommand(this));
+		commands.put(closeApp, new ExitCommand(this));
+
+		
 	}// end createContentPane
 
 	// create and show main dialog
@@ -1147,5 +1152,20 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	public void windowOpened(WindowEvent e) {
 	}
 	
-	
+
+	public void open() {
+		openFile();
+	}
+
+	public void save() {
+		saveFile();
+	}
+
+	public void delete() {
+		deleteRecord();
+	}
+
+	public void exit() {
+		exitApp();
+	}
 }// end class EmployeeDetails

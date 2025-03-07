@@ -1,9 +1,5 @@
 package app;
-/*
- * 
- * This is a class for limiting input in text fields
- * 
- * */
+
 
 import javax.swing.JOptionPane;
 import javax.swing.text.AttributeSet;
